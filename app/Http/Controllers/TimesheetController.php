@@ -22,13 +22,21 @@ class TimesheetController extends Controller
      */
     public function index()
     {
+        $filters = [
+            'filter_date_start' => null,
+            'filter_date_end' => null,
+            'filter_project_id' => 'all',
+            'filter_task_id' => 'all',
+            'filter_hour' => null
+        ];
+        // dd($filters);
         $timesheets = Timesheet::with('project','task')->get();
         // $timesheets = Timesheet::all();
         $tasks_project = Task::select('id', 'name', 'project_id')->with('project:id,name')->get();
         $projects = Project::pluck('name', 'id')->toArray();
         $tasks = Task::pluck('name', 'id')->toArray();
         // dd($tasks);
-        return view('timesheets.index', compact('timesheets','projects','tasks','tasks_project'));
+        return view('timesheets.index', compact('timesheets','projects','tasks','tasks_project','filters'));
     }
 
     /**
@@ -126,6 +134,14 @@ class TimesheetController extends Controller
         $filterDateStart = $data['filter_date_start'];
         $filterDateEnd = $data['filter_date_end'];
         $filterHour = $data['filter_hour'];
+        $filters = [
+            'filter_date_start' => $filterDateStart,
+            'filter_date_end' => $filterDateEnd,
+            'filter_project_id' => $filterProjectId,
+            'filter_task_id' => $filterTaskId,
+            'filter_hour' => $filterHour
+        ];
+        // dd($filters);
         $timesheets = Timesheet::when($filterProjectId != 'all', function($query) use ($filterProjectId) {
             return $query->where('project_id', '=', $filterProjectId);
         })->when($filterTaskId != 'all', function($query) use ($filterTaskId) {
@@ -138,6 +154,6 @@ class TimesheetController extends Controller
             return $query->where('hour', '>=', $filterHour);
         })->with('project','task')->get();
 
-        return view('timesheets.index', compact('timesheets','projects','tasks','tasks_project'));
+        return view('timesheets.index', compact('timesheets','projects','tasks','tasks_project','filters'));
     }
 }

@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="col-12">
-                        <input id="date" type="date" class="form-control" name="date" autofocus>
+                        <input id="date" type="date" class="form-control" name="date" autofocus required>
                     </div>
                 </div>
 
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="col-12">
-                        <select id="project-id" class="form-select project-id" name="project_id">
+                        <select id="project-id" class="form-select project-id" name="project_id" required>
                         @foreach($projects as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
@@ -94,7 +94,7 @@
                     </div>
 
                     <div class="col-12">
-                        <select id="task-id" class="form-select task-id" name="task_id">
+                        <select id="task-id" class="form-select task-id" name="task_id" required>
                         {{-- @foreach($tasks as $key => $value)
                             <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach --}}
@@ -118,11 +118,9 @@
                     </div>
 
                     <div class="col-12">
-                        <input id="hour" type="number" class="form-control" name="hour">
+                        <input id="hour" type="number" class="form-control" name="hour" required>
                     </div>
                 </div>
-
-                {{-- <input type="text" id="user-id" class="d-none" name="user_id" value="{{ Auth::user()->id }}"> --}}
             </div>
 
             <div class="modal-footer">
@@ -232,7 +230,7 @@
                         </div>
                         
                         <div class="col-6">
-                            <input id="edit-date-start" type="date" class="form-control" name="filter_date_start" autofocus>
+                            <input id="filter-date-start" type="date" class="form-control" name="filter_date_start" autofocus>
                         </div>
 
                         <div class="col-6">
@@ -300,10 +298,14 @@
         $(document).ready(function () {
             updateTasks();
             updateEditTasks();
+            updateFilters();
         });
         var pj = @json($projects);
         var tasks = @json($tasks);
         var tasksProject = @json($tasks_project);
+        var filters = @json($filters)
+
+        console.log("Filters - ", filters)
 
         console.log(tasks)
         $('#project-id').change(function() {
@@ -337,6 +339,14 @@
                     $('#edit-task-id').append(`<option value="${value.id}">${value.name}</option>`);
                 }
             });
+        }
+
+        function updateFilters(){
+            $('#filter-date-start').val(filters.filter_date_start);
+            $('#filter-date-end').val(filters.filter_date_end);
+            $('#filter-project-id').val(filters.filter_project_id);
+            $('#filter-task_id').val(filters.filter_task_id);
+            $('#filter-hour').val(filters.filter_hour);
         }
     </script>
 @endsection

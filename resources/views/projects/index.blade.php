@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="col-12">
-                        <input id="name" type="text" class="form-control" name="name" autofocus>
+                        <input id="name" type="text" class="form-control" name="name" autofocus required>
                     </div>
                 </div>
 
@@ -108,10 +108,10 @@
                     </div>
 
                     <div class="col-6">
-                        <input id="start-date" type="date" class="form-control" name="start_date">
+                        <input id="start-date" type="date" class="form-control" name="start_date" required>
                     </div>
                     <div class="col-6">
-                        <input id="due-date" type="date" class="form-control" name="due_date">
+                        <input id="due-date" type="date" class="form-control" name="due_date" required>
                     </div>
                 </div>
 
@@ -223,20 +223,6 @@
             <form method="POST" action="{{ route('projects.filter')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <label for="filter-namide" class="text-md-end">Project Name</label>
-                        </div>
-    
-                        <div class="col-12">
-                            <select id="filter-id" class="form-select" name="filter_id" autofocus>
-                                <option value="all" selected>All</option>
-                                @foreach($projects as $project)
-                                    <option value="{{ $project->id }}">{{ $project->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
     
                     <div class="row mb-3">
                         <div class="col-6">
@@ -301,4 +287,20 @@
 
 @endsection
 @section('script')
+<script>
+    $(document).ready(function () {
+        updateFilters();
+    });
+
+    var filters = @json($filters) 
+
+    function updateFilters(){
+        console.log(filters)
+        $('#filter-start-date-start').val(filters.filter_start_date_start)
+        $('#filter-start-date-end').val(filters.filter_start_date_end)
+        $('#filter-due-date-start').val(filters.filter_due_date_start)
+        $('#filter-due-date-end').val(filters.filter_due_date_end)
+        $('#filter-status').val(filters.filter_status)
+    }
+</script>
 @endsection

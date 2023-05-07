@@ -22,7 +22,14 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view('projects.index', compact('projects'));
+        $filters = [
+            'filter_start_date_start' => null,
+            'filter_start_date_end' => null,
+            'filter_due_date_start' => null,
+            'filter_due_date_end' => null,
+            'filter_status' => 'all'
+        ];
+        return view('projects.index', compact('projects','filters'));
     }
 
     /**
@@ -112,16 +119,19 @@ class ProjectController extends Controller
     public function filter(Request $request)
     {
         $data = $request->all();
-        // dd($data);
-        $filterId = $data['filter_id'];
         $filterStatus = $data['filter_status'];
         $filterStartDateStart = $data['filter_start_date_start'];
         $filterStartDateEnd = $data['filter_start_date_end'];
         $filterDueDateStart = $data['filter_due_date_start'];
         $filterDueDateEnd = $data['filter_due_date_end'];
-        $projects = Project::when($filterId != 'all', function($query) use ($filterId) {
-            return $query->where('id', '=', $filterId);
-        })->when($filterStatus != 'all', function($query) use ($filterStatus) {
+        $filters = [
+            'filter_start_date_start' => $filterStartDateStart,
+            'filter_start_date_end' => $filterStartDateEnd,
+            'filter_due_date_start' => $filterDueDateStart,
+            'filter_due_date_end' => $filterDueDateEnd,
+            'filter_status' => $filterStatus
+        ];
+        $projects = Project::when($filterStatus != 'all', function($query) use ($filterStatus) {
             return $query->where('status', '=', $filterStatus);
         })->when($filterStartDateStart != null, function($query) use ($filterStartDateStart) {
             return $query->where('start_date', '>=', $filterStartDateStart);
@@ -134,6 +144,6 @@ class ProjectController extends Controller
         })->get();
 
         // dd($projects);
-        return view('projects.index', compact('projects'));
+        return view('projects.index', compact('projects','filters'));
     }
 }

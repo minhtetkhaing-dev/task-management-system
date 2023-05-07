@@ -27,10 +27,9 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow bg-primary py-0">
             <div class="container">
-                <a class="navbar-brand text-white fw-bold" href="{{ url('/') }}">
+                <a class="navbar-brand text-white fw-bold" href="{{ url('/project') }}">
                     {{ config('app.name', 'Task Management') }}
                 </a>
-                <!-- <img src="{{ asset('images/Task.png') }}" alt="" class="img-fluid"> -->
                 @guest
                 @else
                 <a href="{{ url('/project') }}" class="btn text-white p-3 nav-list @if (strpos(request()->url(), 'project') !== false) active @endif">Project</a>

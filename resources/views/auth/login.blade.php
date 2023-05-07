@@ -48,7 +48,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <div class="col-lg-6 d-flex my-auto">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -65,9 +65,9 @@
                                     </a>
                                 @endif
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="row mb-0">
+                        <div class="row mt-5">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary w-100">
                                     {{ __('Login') }}

@@ -28,8 +28,16 @@ class TaskController extends Controller
         $projects = Project::pluck('name', 'id')->toArray();
         // $timesheets = Timesheet::pluck('name', 'id')->toArray();
         $timesheets = Timesheet::all();
+        $filters = [
+            'filter_project_id' => 'all',
+            'filter_status' => 'all',
+            'filter_start_date_start' => null,
+            'filter_start_date_end' => null,
+            'filter_due_date_start' => null,
+            'filter_due_date_end' => null
+        ];
         
-        return view('tasks.index', compact(['tasks','projects','timesheets']));
+        return view('tasks.index', compact(['tasks','projects','timesheets','filters']));
     }
 
     /**
@@ -120,16 +128,21 @@ class TaskController extends Controller
         $projects = Project::pluck('name', 'id')->toArray();
         $timesheets = Timesheet::all();
         $data = $request->all();
-        $filterId = $data['filter_id'];
         $filterProjectId = $data['filter_project_id'];
         $filterStatus = $data['filter_status'];
         $filterStartDateStart = $data['filter_start_date_start'];
         $filterStartDateEnd = $data['filter_start_date_end'];
         $filterDueDateStart = $data['filter_due_date_start'];
         $filterDueDateEnd = $data['filter_due_date_end'];
-        $tasks = Task::when($filterId != 'all', function($query) use ($filterId) {
-            return $query->where('id', '=', $filterId);
-        })->when($filterStatus != 'all', function($query) use ($filterStatus) {
+        $filters = [
+            'filter_project_id' => $filterProjectId,
+            'filter_status' => $filterStatus,
+            'filter_start_date_start' => $filterStartDateStart,
+            'filter_start_date_end' => $filterStartDateEnd,
+            'filter_due_date_start' => $filterDueDateStart,
+            'filter_due_date_end' => $filterDueDateEnd
+        ];
+        $tasks = Task::when($filterStatus != 'all', function($query) use ($filterStatus) {
             return $query->where('status', '=', $filterStatus);
         })->when($filterProjectId != 'all', function($query) use ($filterProjectId) {
             return $query->where('project_id', '=', $filterProjectId);
@@ -143,6 +156,6 @@ class TaskController extends Controller
             return $query->where('start_date', '<=', $filterDueDateEnd);
         })->with('project','timesheets')->get();
 
-        return view('tasks.index', compact('tasks','projects','timesheets'));
+        return view('tasks.index', compact('tasks','projects','timesheets','filters'));
     }
 }
