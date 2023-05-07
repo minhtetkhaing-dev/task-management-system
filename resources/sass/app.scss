@@ -1,0 +1,108 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+body{
+    // background: linear-gradient(180deg, white, #0084a8);
+    background:rgb(225, 245, 249);
+}
+
+th,td{
+    vertical-align: middle;
+}
+
+th{
+    font-size: large !important;
+    font-weight: bolder !important;
+}
+
+.btn-primary{
+    background: #0084a8 !important;
+    border: #0084a8;
+}
+
+.btn-primary:hover{
+    background: #013848;
+}
+
+.bg-primary{
+    background-color: #0084a8 !important;
+}
+
+.nav-bg{
+    background: linear-gradient(180deg,#0084a8, #ffffff);
+}
+
+.card{
+    border-radius: 0px !important;
+    background: rgba(0, 132, 168, 0.3);
+}
+
+.profile{
+    font-size: 70px;
+    color: #0084a8;
+}
+
+.border-primary{
+    border-color: rgba(0, 132, 168, 0.3) !important;
+}
+
+.card-header{
+    background: #0084a8;
+    border-radius: 0px !important;
+    color: white;
+}
+
+.form-check-input:checked{
+    background-color: #0084a8;
+}
+
+.form-check-input{
+    font-size: large !important;
+}
+
+.form-check-input:focus{
+    box-shadow: none;
+}
+
+.nav-list{
+    background: #0084a8;
+    border-radius: 0px;
+    transition: 1s;
+}
+
+.nav-list:hover{
+    background: #013848;
+    border-bottom: 2px solid rgb(60, 246, 60);
+}
+
+.nav-list.active{
+    background: #013848;
+    border:none;
+    border-bottom: 2px solid rgb(14, 196, 14);
+}
+
+.table-striped > tbody > tr > th {
+    --bs-table-accent-bg: #0084a8 !important;
+    color: white !important;
+}
+
+.modal-content{
+    border-radius: 0px !important;
+    background:rgb(238, 248, 250);
+}
+
+.modal-header{
+    background: linear-gradient(90deg, #0084a8,white);
+    border-radius: 0px;
+    color: white;
+}
+
+.message-bg{
+    background: rgba(1, 100, 136, 0.3);
+}
