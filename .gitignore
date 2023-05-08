@@ -19,3 +19,4 @@ yarn-error.log
 test
 package-lock.json
 yarn.lock
+composer.lock
