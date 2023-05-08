@@ -233,10 +233,10 @@
                         </div>
     
                         <div class="col-6">
-                            <input id="filter-start-date-start" type="date" class="form-control" name="filter_start_date_start">
+                            From <input id="filter-start-date-start" type="date" class="form-control" name="filter_start_date_start">
                         </div>
                         <div class="col-6">
-                            <input id="filter-start-date-end" type="date" class="form-control" name="filter_start_date_end">
+                            To <input id="filter-start-date-end" type="date" class="form-control" name="filter_start_date_end">
                         </div>
                     </div>
 
@@ -249,10 +249,10 @@
                         </div>
     
                         <div class="col-6">
-                            <input id="filter-due-date-start" type="date" class="form-control" name="filter_due_date_start">
+                            From <input id="filter-due-date-start" type="date" class="form-control" name="filter_due_date_start">
                         </div>
                         <div class="col-6">
-                            <input id="filter-due-date-end" type="date" class="form-control" name="filter_due_date_end">
+                            To <input id="filter-due-date-end" type="date" class="form-control" name="filter_due_date_end">
                         </div>
                     </div>
     

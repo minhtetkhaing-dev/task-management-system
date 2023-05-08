@@ -138,9 +138,9 @@ class ProjectController extends Controller
         })->when($filterStartDateEnd != null, function($query) use ($filterStartDateEnd) {
             return $query->where('start_date', '<=', $filterStartDateEnd);
         })->when($filterDueDateStart != null, function($query) use ($filterDueDateStart) {
-            return $query->where('start_date', '>=', $filterDueDateStart);
+            return $query->where('due_date', '>=', $filterDueDateStart);
         })->when($filterDueDateEnd != null, function($query) use ($filterDueDateEnd) {
-            return $query->where('start_date', '<=', $filterDueDateEnd);
+            return $query->where('due_date', '<=', $filterDueDateEnd);
         })->get();
 
         // dd($projects);
