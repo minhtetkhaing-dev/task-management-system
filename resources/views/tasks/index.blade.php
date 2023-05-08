@@ -49,7 +49,7 @@
                         New
                     @endif
                     @if($task->status == 'ongoing')
-                        In Progress
+                        On Going
                     @endif
                     @if($task->status == 'done')
                         Done

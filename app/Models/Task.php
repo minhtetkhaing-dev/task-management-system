@@ -27,7 +27,7 @@ class Task extends Model
         static::deleted(function($task)
         {
             foreach($task->timesheets as $timesheet){
-                $task->delete();
+                $timesheet->delete();
             }
         });
     }
