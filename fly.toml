@@ -1,4 +1,21 @@
+# fly.toml app configuration file generated for solitary-breeze-9503 on 2023-05-08T23:14:09+06:30
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "solitary-breeze-9503"
+primary_region = "sin"
+
+[build]
+  [build.args]
+    NODE_VERSION = "18"
+    PHP_VERSION = "8.1"
+
 [env]
+  APP_ENV = "production"
+  LOG_CHANNEL = "stderr"
+  LOG_LEVEL = "info"
+  LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
   APP_KEY = "base64:+HLAx7p1ZHLf1G0F/OV0N/0Z3bMlNc7xAgijCDbAgO4="
   DATABASE_URL = "postgres://min_postgres_user:ZiOHe2MNdFPlZM5kdnKnpmlykBtNJPAs@dpg-chcget3hp8u0160d9cig-a.singapore-postgres.render.com/min_postgres"
   DB_CONNECTION = "pgsql"
@@ -7,3 +24,9 @@
   DB_PASSWORD = "ZiOHe2MNdFPlZM5kdnKnpmlykBtNJPAs"
   DB_PORT = "5432"
   DB_USERNAME = "min_postgres_user"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
