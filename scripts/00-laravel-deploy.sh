@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
+echo "NPM install"
+yarn install
+
 echo "Running composer"
 composer global require hirak/prestissimo
 composer install --no-dev --working-dir=/var/www/html
-
-echo "NPM install"
-yarn install
 
 echo "Caching config..."
 php artisan config:cache
